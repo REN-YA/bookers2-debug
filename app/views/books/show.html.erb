@@ -38,9 +38,9 @@
           </td>
           <td><p> コメント数:<%= @books.book_comments.count %></p></td>
           </tr>
+          <% @books.book_comments.each do |book_comment| %>
           <tr>
           <div>
-          <% @books.book_comments.each do |book_comment| %>
           <td>
            <p><%= image_tag('no_image.jpg') %></p>
            <%= link_to book_comment.user.name, user_path(@books.user) %>
@@ -62,9 +62,16 @@
       </table>
       <div>
           <%= form_with(model:[@books, @book_comment], local: true) do |f| %>
+          <% if @book_comment.errors.any? %>
+           <h3><%= @book_comment.errors.count %>error prohibited this obj from being saved</h3>
+           <br>
+           <% @book_comment.errors.full_messages.each do |message| %>
+           <li><%= message %></li>
+           <% end %>
+           <% end %>
            <%= f.text_area :comment,cols:'85',rows:'5' ,placeholder: "コメントをここに" %>
            <br>
-           <%= f.submit "送信する" %>
+           <%= f.submit "送信" %>
           <% end %>
           </div>
     </div>

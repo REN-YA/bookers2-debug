@@ -4,8 +4,15 @@ class BookCommentsController < ApplicationController
     book = Book.find(params[:book_id])
     comment = current_user.book_comments.new(book_comment_params)
     comment.book_id = book.id
-    comment.save
-    redirect_to book_path(book)
+    if comment.save
+     redirect_to book_path(book)
+    else
+     @book_comment = comment
+      @books = Book.find(params[:book_id])
+      @book = Book.new
+      @user = @books.user
+     render :'books/show'
+    end
   end
 
 
