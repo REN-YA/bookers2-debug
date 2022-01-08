@@ -18,7 +18,11 @@ def search_for(model, content, method)
   elsif model == 'book'
       if method == 'perfect'
         Book.where(title: content)
-      else
+      elsif method == 'forward'
+        Book.where('title LIKE ?', content+'%')
+      elsif method == 'backward'
+        Book.where('title LIKE ?', '%'+content)
+      else 
         Book.where('title LIKE ?', '%'+content+'%')
       end
   end
