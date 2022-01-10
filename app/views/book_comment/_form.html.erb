@@ -1,0 +1,14 @@
+<div>
+    <% if book_comment.errors.any? %>
+      <h3><%= book_comment.errors.count %>error prohibited this obj from being saved</h3>
+  <br>
+      <% book_comment.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    <% end %>
+    <%= form_with(model:[books, book_comment], remote: true) do |f| %>
+    <%= f.text_area :comment,cols:'85',rows:'5' ,placeholder: "コメントをここに" %>
+   <br>
+    <%= f.submit "送信" %>
+  <% end %>
+</div>

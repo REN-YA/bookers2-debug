@@ -22,7 +22,7 @@ def search_for(model, content, method)
         Book.where('title LIKE ?', content+'%')
       elsif method == 'backward'
         Book.where('title LIKE ?', '%'+content)
-      else 
+      else
         Book.where('title LIKE ?', '%'+content+'%')
       end
   end

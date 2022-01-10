@@ -1,0 +1,4 @@
+
+$(".comment_table").html("<%= j(render 'book_comment/index', books: @books ) %>");
+<!--$("#destroy_btn").html("<%# j(render 'book_comment/index', books: @books) %>");-->
+$(".comment_count").html("<%= j(render 'book_comment/comment_count', book: @books) %>");
